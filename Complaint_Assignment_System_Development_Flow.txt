@@ -1,0 +1,483 @@
+COMPLAINT ASSIGNMENT SYSTEM
+Complete Development Flow
+========================================
+
+PROJECT TYPE
+-------------
+Small console-based project using:
+- Python
+- MySQL
+- mysql-connector-python
+- Virtual Environment (venv)
+
+No Flask, Django, HTML, CSS, JavaScript, or SQLAlchemy.
+
+
+FINAL BUSINESS FLOW
+-------------------
+CUSTOMER
+   |
+   | Raise Complaint
+   v
+DATABASE
+   |
+   v
+ADMIN
+   |
+   | Assign Complaint
+   v
+EMPLOYEE
+   |
+   | Work on Complaint
+   | Complete Complaint
+   v
+CUSTOMER
+   |
+   | Give Feedback
+   v
+DATABASE
+   |
+   +-------------> ADMIN can view feedback
+   |
+   +-------------> EMPLOYEE can view feedback
+
+
+========================================
+PHASE 1 - PROJECT SETUP
+========================================
+
+1. Create project folder
+
+Complaint_Assignment_System/
+
+2. Create virtual environment
+
+venv/
+
+3. Install MySQL connector
+
+mysql-connector-python
+
+4. Project structure
+
+Complaint_Assignment_System/
+|
++-- database/
+|   +-- connection.py
+|
++-- venv/
+|
++-- admin.py
++-- Complaint.py
++-- customer.py
++-- employee.py
++-- main.py
++-- readme.txt
+
+
+========================================
+PHASE 2 - DATABASE
+========================================
+
+5. Create MySQL database
+
+Database name:
+complaint_system
+
+6. Create 5 tables
+
+- customer
+- employee
+- complaint
+- assignment
+- feedback
+
+7. Database relationships
+
+customer
+   |
+   | customer_id
+   v
+complaint
+   |
+   | complaint_id
+   v
+assignment
+   |
+   | employee_id
+   v
+employee
+
+complaint
+   |
+   | complaint_id
+   v
+feedback
+
+
+========================================
+PHASE 3 - PYTHON + MYSQL CONNECTION
+========================================
+
+8. Create database/connection.py
+
+Goal:
+
+Python
+   |
+   v
+MySQL
+   |
+   v
+complaint_system
+
+First test should only confirm that Python can connect
+successfully to MySQL.
+
+
+========================================
+PHASE 4 - CUSTOMER MODULE
+========================================
+
+9. Customer registration
+
+Customer enters:
+- Name
+- Email
+- Phone
+
+Save customer into the customer table.
+
+10. Customer login
+
+Customer enters email.
+
+Python checks the customer table.
+
+11. Customer menu
+
+1. Register Complaint
+2. Check Complaint Status
+3. Complaint History
+4. Give Feedback
+5. Exit
+
+
+========================================
+PHASE 5 - COMPLAINT MODULE
+========================================
+
+12. Customer raises complaint
+
+Customer enters:
+- Machine model
+- Machine number
+- Problem
+- Priority
+
+Save complaint with:
+- complaint_id
+- customer_id
+- machine_model
+- machine_number
+- problem
+- priority
+- status
+- created_at
+
+Initial status:
+
+OPEN
+
+
+========================================
+PHASE 6 - CUSTOMER COMPLAINT HISTORY
+========================================
+
+13. Customer views complaint history.
+
+Customer should see only their own complaints.
+
+Display:
+- Complaint ID
+- Machine
+- Problem
+- Priority
+- Status
+- Created Date
+
+
+========================================
+PHASE 7 - ADMIN MODULE
+========================================
+
+14. Admin login.
+
+15. Admin menu
+
+1. View New Complaints
+2. Assign Complaint
+3. View All Complaints
+4. View Feedback
+5. Exit
+
+
+========================================
+PHASE 8 - EMPLOYEE MANAGEMENT
+========================================
+
+16. Admin adds employees.
+
+Employee information:
+- Employee name
+- Email
+- Phone
+
+Save into employee table.
+
+
+========================================
+PHASE 9 - ADMIN VIEWS COMPLAINTS
+========================================
+
+17. Admin views new/open complaints.
+
+Example:
+
+Complaint ID
+Customer
+Problem
+Priority
+Status
+
+Admin selects a complaint to assign.
+
+
+========================================
+PHASE 10 - COMPLAINT ASSIGNMENT
+========================================
+
+18. Admin assigns an employee.
+
+Admin selects:
+- Complaint ID
+- Employee ID
+
+Create a record in assignment table.
+
+Then update complaint status:
+
+OPEN -> ASSIGNED
+
+
+========================================
+PHASE 11 - EMPLOYEE MODULE
+========================================
+
+19. Employee login.
+
+20. Employee menu
+
+1. My Assigned Complaints
+2. Start Complaint
+3. Complete Complaint
+4. View Feedback
+5. Exit
+
+
+========================================
+PHASE 12 - EMPLOYEE ASSIGNED COMPLAINTS
+========================================
+
+21. Employee views only complaints assigned to them.
+
+Relationship:
+
+employee
+   |
+   v
+assignment
+   |
+   v
+complaint
+
+
+========================================
+PHASE 13 - START SERVICE
+========================================
+
+22. Employee selects an assigned complaint.
+
+Update status:
+
+ASSIGNED -> IN_PROGRESS
+
+
+========================================
+PHASE 14 - COMPLETE SERVICE
+========================================
+
+23. Employee completes the work.
+
+Update status:
+
+IN_PROGRESS -> COMPLETED
+
+
+========================================
+PHASE 15 - CUSTOMER CHECKS STATUS
+========================================
+
+24. Customer checks complaint status.
+
+Customer can see:
+
+- Complaint ID
+- Problem
+- Employee
+- Status
+
+
+========================================
+PHASE 16 - CUSTOMER FEEDBACK
+========================================
+
+25. Customer gives feedback after complaint is COMPLETED.
+
+Customer enters:
+- Rating
+- Comments
+
+Save into feedback table.
+
+
+========================================
+PHASE 17 - ADMIN FEEDBACK
+========================================
+
+26. Admin views feedback.
+
+Admin can see:
+- Complaint
+- Customer
+- Employee
+- Rating
+- Comments
+- Date
+
+
+========================================
+PHASE 18 - EMPLOYEE FEEDBACK
+========================================
+
+27. Employee views feedback.
+
+Employee should see feedback only for complaints assigned
+to that employee.
+
+
+========================================
+PHASE 19 - ERROR HANDLING
+========================================
+
+28. Add validation after the main features work.
+
+Handle:
+- Invalid email
+- Invalid phone
+- Empty name
+- Invalid complaint ID
+- Invalid employee ID
+- Invalid priority
+- Invalid menu option
+- Duplicate email
+- Complaint already completed
+- Feedback already submitted
+
+
+========================================
+PHASE 20 - COMPLETE PROJECT TEST
+========================================
+
+29. Test the complete real-world flow:
+
+1. Customer registers
+2. Customer raises complaint
+3. Admin sees complaint
+4. Admin adds/selects employee
+5. Admin assigns employee
+6. Employee logs in
+7. Employee sees assigned complaint
+8. Employee starts work
+9. Employee completes work
+10. Customer checks status
+11. Customer gives feedback
+12. Admin sees feedback
+13. Employee sees feedback
+
+
+========================================
+PHASE 21 - FINAL CLEANUP
+========================================
+
+30. Remove unnecessary code.
+31. Rename unclear variables.
+32. Add useful comments.
+33. Clean console/menu output.
+34. Handle database errors.
+35. Update README.
+36. Perform final testing.
+
+
+========================================
+DEVELOPMENT METHOD
+========================================
+
+Follow this cycle for every step:
+
+I explain the current step
+        |
+        v
+You write the code
+        |
+        v
+You run it
+        |
+        v
+You send code/output
+        |
+        v
+I evaluate it
+        |
+        +---- Correct ----> Next step
+        |
+        +---- Wrong ------> You fix it with guidance
+
+
+CURRENT STATUS
+--------------
+
+Completed:
+- Project structure
+- venv
+- MySQL database
+- 5 tables
+- Foreign-key relationships
+
+Next step:
+Python -> MySQL connection
+
+After that:
+Customer Registration
+-> Customer Login
+-> Customer Complaint
+-> Customer History
+-> Admin
+-> Assignment
+-> Employee
+-> Completion
+-> Customer Feedback
+-> Admin Feedback
+-> Employee Feedback
+-> Testing
+-> Final Cleanup
