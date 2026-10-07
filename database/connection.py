@@ -6,10 +6,10 @@ from database.database_create import create_database
 create_database()
 
 connection = mysql.connector.connect(
-    host="localhost", # host name 
-    user="root",    # user name from you mysql
-    password="password", #
-    database="your-database-name"
+    host="localhost", # host name .
+    user="root",    # user name from your mysql.
+    password="password", # your password.
+    database="your-database-name" # database which you create .
 )
 
 
