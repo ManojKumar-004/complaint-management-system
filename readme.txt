@@ -65,7 +65,7 @@ Update the MySQL details in database/create_database.py:
 connection = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="Root@123"
+    password="password"
 )
 
 Change the password according to your MySQL configuration.
